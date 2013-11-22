@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일\shaders">
+      <UniqueIdentifier>{8b6d8ee1-4367-4fb0-9e63-725c49b3a4f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\shaders">
+      <UniqueIdentifier>{d35be087-7905-4d8f-bad9-91a87fb23562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\components">
+      <UniqueIdentifier>{c458d81c-c615-4ea8-9b92-44674f5d8490}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\utils">
+      <UniqueIdentifier>{a5680d17-8eda-48dd-b30e-73aa427d7e9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\math">
+      <UniqueIdentifier>{519cd55b-7f47-4118-b6d4-ef3a9a285cce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\components">
+      <UniqueIdentifier>{dafcfa02-6ba4-4d25-80cd-7acac51f3650}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\utils">
+      <UniqueIdentifier>{7a769d16-f220-41b1-a79d-c636405b0df0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\math">
+      <UniqueIdentifier>{abe5b857-669b-4c62-8ff0-21e57ec4ff42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\components\lights">
+      <UniqueIdentifier>{806f37cc-9dfe-421a-9ae9-f1c767f72bb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\components\lights">
+      <UniqueIdentifier>{b7bf3d5b-4f6f-4147-89ba-5d6a39f6f764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\components2d">
+      <UniqueIdentifier>{21736f3e-4513-4e2a-977c-ff8c11d5acb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\components2d">
+      <UniqueIdentifier>{3eb1d105-21bc-4c36-9ebb-2ebd5e984d6f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mainComponent.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="window.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>헤더 파일\components</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.h">
+      <Filter>헤더 파일\components</Filter>
+    </ClInclude>
+    <ClInclude Include="time.h">
+      <Filter>헤더 파일\components</Filter>
+    </ClInclude>
+    <ClInclude Include="transform.h">
+      <Filter>헤더 파일\components</Filter>
+    </ClInclude>
+    <ClInclude Include="renderUtil.h">
+      <Filter>헤더 파일\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="technique.h">
+      <Filter>헤더 파일\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="mymath.h">
+      <Filter>헤더 파일\math</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.h">
+      <Filter>헤더 파일\shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex.h">
+      <Filter>헤더 파일\components</Filter>
+    </ClInclude>
+    <ClInclude Include="material.h">
+      <Filter>헤더 파일\components</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.h">
+      <Filter>헤더 파일\components</Filter>
+    </ClInclude>
+    <ClInclude Include="lights.h">
+      <Filter>헤더 파일\components\lights</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>헤더 파일\components</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="lua_backend.h">
+      <Filter>헤더 파일\components</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite2d.h">
+      <Filter>헤더 파일\components2d</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="mainComponent.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="window.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>소스 파일\components</Filter>
+    </ClCompile>
+    <ClCompile Include="mesh.cpp">
+      <Filter>소스 파일\components</Filter>
+    </ClCompile>
+    <ClCompile Include="time.cpp">
+      <Filter>소스 파일\components</Filter>
+    </ClCompile>
+    <ClCompile Include="transform.cpp">
+      <Filter>소스 파일\components</Filter>
+    </ClCompile>
+    <ClCompile Include="vertex.cpp">
+      <Filter>소스 파일\components</Filter>
+    </ClCompile>
+    <ClCompile Include="renderUtil.cpp">
+      <Filter>소스 파일\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="technique.cpp">
+      <Filter>소스 파일\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="shader.cpp">
+      <Filter>소스 파일\shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="mymath.cpp">
+      <Filter>소스 파일\math</Filter>
+    </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>소스 파일\components</Filter>
+    </ClCompile>
+    <ClCompile Include="material.cpp">
+      <Filter>소스 파일\components</Filter>
+    </ClCompile>
+    <ClCompile Include="lights.cpp">
+      <Filter>소스 파일\components\lights</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>소스 파일\components</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="lua_backend.cpp">
+      <Filter>소스 파일\components</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite2d.cpp">
+      <Filter>소스 파일\components2d</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

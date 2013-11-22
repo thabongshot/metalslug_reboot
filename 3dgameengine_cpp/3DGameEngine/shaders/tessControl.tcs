@@ -1,0 +1,47 @@
+#version 410 core
+
+layout (vertices = 3) out;
+
+uniform vec3 tessEyeWorldPos;
+
+in vec3 worldPos0[];
+in vec2 texCoord0[];
+in vec3 normal0[];
+
+out vec3 worldPos0_ES_in[];
+out vec2 texCoord0_ES_in[];
+out vec3 normal0_ES_in[];
+
+float GetTessLevel(float distance0, distance1)
+{
+	float avgDistance = (distance0 + distance1) / 2.0;
+	
+	if(avgDistance <= 2.0)
+	{
+		return 10.0;
+	}
+	else if(avgDistance <= 5.0)
+	{
+		return 7.0;
+	}
+	else
+	{
+		return 3.0;
+	}
+}
+
+void main()
+{
+	texCoord0_ES_in[gl_InvocationID] = texCoord0[gl_InvocationID];
+	normal0_ES_in[gl_InvocationID] = normal0[gl_InvocationID];
+	worldPos0_ES_in[gl_InvocationID] = worldPos0[gl_InvocationID];
+	
+	float eyeToVertexDistance0 = distance(tessEyeWorldPos, worldPos0_ES_in[0]);
+	float eyeToVertexDistance1 = distance(tessEyeWorldPos, worldPos0_ES_in[1]);
+	float eyeToVertexDistance2 = distance(tessEyeWorldPos, worldPos0_ES_in[2]);
+	
+	gl_TessLevelOuter[0] = GetTessLevel(eyeToVertexDistance0, eyeToVertexDistance2);
+	gl_TessLevelOuter[1] = GetTessLevel(eyeToVertexDistance2, eyeToVertexDistance0);
+	gl_TessLevelOuter[2] = GetTessLevel(eyeToVertexDistance0, eyeToVertexDistance1);
+	gl_TessLevelInner[0] = gl_TessLevelOuter[2];
+}
