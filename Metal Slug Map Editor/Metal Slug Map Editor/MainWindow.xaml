@@ -1,0 +1,169 @@
+﻿<Window x:Class="Metal_Slug_Map_Editor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Metal Slug Map Editor" Height="720" Width="1430" 
+        xmlns:sharpGL="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme\Theme.xaml"/>
+                <ResourceDictionary Source="Theme\ExpanderTemplate.xaml"/>             
+            </ResourceDictionary.MergedDictionaries>
+            <Color x:Key="colorBackground">#FF323232</Color>
+    <Style x:Key="BorderStyle1" TargetType="{x:Type Border}" >
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <SolidColorBrush Color="{StaticResource colorBackground}"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ClipToBounds" Value="True"/>
+    </Style>
+    <Storyboard x:Key="storyScreenshotTaken" AutoReverse="True">
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="btnScreenshot" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1.1" KeySpline="0.5,0,0,1"/>
+        </DoubleAnimationUsingKeyFrames>
+        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="btnScreenshot" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+            <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="1.5" KeySpline="0.5,0,0,1"/>
+        </DoubleAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="btnScreenshot" Storyboard.TargetProperty="(ContentControl.Content)">
+            <DiscreteObjectKeyFrame KeyTime="00:00:00.0100000" Value="Saved"/>
+        </ObjectAnimationUsingKeyFrames>
+    </Storyboard>
+    <GridLength x:Key="LabelSpacing">4</GridLength>
+    <TransformGroup x:Key="NormalTransform">
+        <ScaleTransform ScaleX="1" ScaleY="1"/>
+        <SkewTransform AngleX="0" AngleY="0"/>
+        <RotateTransform Angle="0"/>
+        <TranslateTransform X="0" Y="0"/>
+    </TransformGroup>
+    <TransformGroup x:Key="InvisibleTransform">
+        <ScaleTransform ScaleX="1" ScaleY="1"/>
+        <SkewTransform AngleX="0" AngleY="0"/>
+        <RotateTransform Angle="0"/>
+        <TranslateTransform X="0" Y="0"/>
+    </TransformGroup>
+    <SolidColorBrush x:Key="SliderLabelBrush" Color="#FF1A1A1A"/>
+    </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="#FF323232">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="70*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="26"/>
+            <RowDefinition  Height="25"/>
+            <RowDefinition  Height="1*"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem Header="File">
+                <MenuItem Header="New" >
+                    <MenuItem.Icon>
+                        <Image Source="toolbarimg/Document_16x16.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Open"></MenuItem>
+                <MenuItem Header="Save"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Exit"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Undo"></MenuItem>
+                <MenuItem Header="Redo"></MenuItem>
+                <MenuItem Header="Cut"></MenuItem>
+                <MenuItem Header="Copy"></MenuItem>
+                <MenuItem Header="Paste"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Layer">
+                <MenuItem Header="All"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Backgound"></MenuItem>
+                <MenuItem Header="Foregournd"></MenuItem>
+                <MenuItem Header="Front"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="NPC"></MenuItem>
+                <MenuItem Header="Enemy"></MenuItem>
+                <Separator></Separator>
+                <MenuItem Header="Camera"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Setting">
+                <MenuItem Header="Language"></MenuItem>
+                <MenuItem Header="Preference"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About Map Editor.."></MenuItem>
+            </MenuItem>
+
+        </Menu>
+
+        <ToolBar Grid.ColumnSpan="2" Grid.Row="1">
+
+            <Button ToolTip="New File">
+                <Image Source="toolbarimg/Document_16x16.png" />
+            </Button>
+
+          
+            
+        </ToolBar>
+
+
+        <!-- The OpenGL control provides a OpenGL drawing surface. -->
+        <sharpGL:OpenGLControl 
+            Name="openGLControl" OpenGLDraw="openGLControl_OpenGLDraw" 
+            OpenGLInitialized="openGLControl_OpenGLInitialized" Resized="openGLControl_Resized"
+            DrawFPS="True" RenderContextType="FBO" FrameRate="60" Margin="0,0,0,0" Grid.Column="1"  Grid.Row="2"  Grid.RowSpan="2"
+            />
+        <TabControl Grid.Row="2" Margin="0,0,0,3" >
+            <TabItem Header="Map">
+                <ScrollViewer VerticalAlignment="Stretch">
+                <Grid Background="#FFE5E5E5">
+                    <TreeView HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" x:Name="tvMap" SelectedItemChanged="tvMap_SelectedItemChanged">
+                    </TreeView>
+
+               </Grid>
+               </ScrollViewer>
+            </TabItem>
+            <TabItem Header="Camera Event">
+                <Grid Background="#FFE5E5E5">
+                    <ListView HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" x:Name="tvCam" SelectionChanged="tvCam_SelectionChanged">
+                        <ListViewItem Tag="New">
+                            <Label Content="New Camera"></Label>
+                        </ListViewItem>
+                        <ListViewItem>
+                            <Label Content="Select"></Label>
+                        </ListViewItem>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="NPC &amp; Enemy">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+
+        <Grid Grid.Column="0" Grid.Row="3" Background="#FF323232" >
+
+            <Expander Header="Property" Margin="4,0,4,4" IsExpanded="True" Template="{DynamicResource ExpanderControlTemplate1}" Style="{DynamicResource ExpanderStyle2}">
+                <StackPanel Margin="4,4,4,4">
+                 <Label HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="lFileName" Content="Null" Height="25" Width="230" Margin="5,0,0,0"></Label>
+                    <Label x:Name="lbSize" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="90" Margin="130,30,0,0"></Label>
+                    <Label x:Name="lbZoom" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="90" Margin="130,60,0,0"></Label>
+                    <Label x:Name="lbCenter" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="90" Margin="130,90,0,0"></Label>
+                </StackPanel>
+            </Expander>
+<!--
+             <Image HorizontalAlignment="Left" VerticalAlignment="Top" x:Name ="previewImg" Margin="10,30,0,0" Width="100" Height="100"></Image>
+            <Border HorizontalAlignment="Left" VerticalAlignment="Top" x:Name ="bdTestData" Height="100" Width="100" Margin="120,30,0,0" Grid.Column="1" Grid.ColumnSpan="6"
+                    BorderThickness="0" Background="White" CornerRadius="3"/>
+            <Label x:Name="lbSize" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="90" Margin="130,30,0,0"></Label>
+            <Label x:Name="lbZoom" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="90" Margin="130,60,0,0"></Label>
+            <Label x:Name="lbCenter" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" Width="90" Margin="130,90,0,0"></Label>
+            -->
+        </Grid>
+
+
+    </Grid>
+</Window>

@@ -1,0 +1,18 @@
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\bin\Debug\Metal Slug Map Editor.exe.config
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\bin\Debug\Metal Slug Map Editor.exe
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\bin\Debug\Metal Slug Map Editor.pdb
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\bin\Debug\SharpGL.dll
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\bin\Debug\SharpGL.SceneGraph.dll
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\bin\Debug\SharpGL.WPF.dll
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal Slug Map Editor.csprojResolveAssemblyReference.cache
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\MainWindow.baml
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\MainWindow.g.cs
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\App.g.cs
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal Slug Map Editor_MarkupCompile.cache
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal Slug Map Editor.g.resources
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal_Slug_Map_Editor.Properties.Resources.resources
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal Slug Map Editor.csproj.GenerateResource.Cache
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal Slug Map Editor.exe
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal Slug Map Editor.pdb
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Theme\ExpanderTemplate.baml
+C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Theme\Theme.baml
