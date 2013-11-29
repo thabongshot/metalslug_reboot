@@ -1,6 +1,6 @@
 #include "window.h"
 
-#include "freeglut-2.8.1\include\GL\freeglut.h"
+#include <freeglut-2.8.1\include\GL\freeglut.h>
 
 void Window::createWindow(int width, int height, const char *title)
 {

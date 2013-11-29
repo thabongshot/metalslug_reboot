@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 
-#include "glew-1.10.0\include\GL\glew.h"
+#include <glew-1.10.0\include\GL\glew.h>
 
 #include "shader.h"
 

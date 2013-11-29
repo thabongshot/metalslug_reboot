@@ -4,11 +4,11 @@
 //#pragma comment (linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 #endif
 
-#include "glew-1.10.0\include\GL\glew.h"
+#include <glew-1.10.0\include\GL\glew.h>
 
-#include "freeglut-2.8.1\include\GL\freeglut.h"
+#include <freeglut-2.8.1\include\GL\freeglut.h>
 
-#include "DevIL\include\IL\ilut.h"
+#include <DevIL\include\IL\ilut.h>
 
 #include "mainComponent.h"
 #include "window.h"

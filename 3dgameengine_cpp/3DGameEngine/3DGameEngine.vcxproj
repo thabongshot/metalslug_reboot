@@ -41,9 +41,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)lua5.1\include;$(SolutionDir)assimp\include;$(SolutionDir)glm-0.9.4.4;$(SolutionDir)glew-1.10.0;$(SolutionDir)freeglut-2.8.1;$(SolutionDir)DevIL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)lua5.1\lib\dll;$(SolutionDir)glew-1.10.0\lib\Release\Win32;$(SolutionDir)assimp\lib;$(SolutionDir)DevIL\lib;$(SolutionDir)freeglut-2.8.1\lib\x86\Debug;$(SolutionDir)glew-1.10.0;$(LibraryPath)</LibraryPath>
-    <ReferencePath>$(SolutionDir)glew-1.10.0\lib\Release\Win32;$(SolutionDir)DevIL\lib;$(ReferencePath)</ReferencePath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <ReferencePath>$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -56,12 +56,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(COMMON_LIB_DIR)\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glew32.lib;ilu.lib;ilut.lib;devil.lib;assimp.lib;lua5.1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>lua5.1\lib\dll;freeglut-2.8.1\lib\x86\Debug;glew-1.10.0\lib\Release\Win32;DevIL\lib;assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(COMMON_LIB_DIR)\DevIL\lib;$(COMMON_LIB_DIR)\lua5.1\lib\dll;$(COMMON_LIB_DIR)\glew-1.10.0\lib\Release\Win32;$(COMMON_LIB_DIR)\freeglut-2.8.1\lib\x86\Debug;$(COMMON_LIB_DIR)\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

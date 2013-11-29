@@ -1,4 +1,4 @@
-#include "freeglut-2.8.1\include\GL\freeglut.h"
+#include <freeglut-2.8.1\include\GL\freeglut.h>
 
 #include "time.h"
 

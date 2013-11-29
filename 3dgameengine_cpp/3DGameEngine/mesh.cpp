@@ -1,10 +1,10 @@
-#include "glew-1.10.0\include\GL\glew.h"
+#include <glew-1.10.0\include\GL\glew.h>
 
 #include "mesh.h"
 
-#include "assimp\include\Importer.hpp"
-#include "assimp\include\scene.h"
-#include "assimp\include\postprocess.h"
+#include <assimp\include\Importer.hpp>
+#include <assimp\include\scene.h>
+#include <assimp\include\postprocess.h>
 
 #include <fstream>
 

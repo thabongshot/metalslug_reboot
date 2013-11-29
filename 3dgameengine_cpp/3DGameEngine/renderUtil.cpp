@@ -1,8 +1,8 @@
 #include "renderUtil.h"
 
-#include "glew-1.10.0\include\GL\glew.h"
+#include <glew-1.10.0\include\GL\glew.h>
 
-#include "freeglut-2.8.1\include\GL\freeglut.h"
+#include <freeglut-2.8.1\include\GL\freeglut.h>
 
 #include "shader.h"
 #include "mesh.h"

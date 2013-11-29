@@ -5,9 +5,9 @@
 
 extern "C"
 {
-#include "lua5.1\include\lua.h"
-#include "lua5.1\include\lualib.h"
-#include "lua5.1\include\lauxlib.h"
+#include <lua5.1\include\lua.h>
+#include <lua5.1\include\lualib.h>
+#include <lua5.1\include\lauxlib.h>
 }
 
 #include <vector>

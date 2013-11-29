@@ -1,7 +1,7 @@
 #ifndef _SHADER_H_
 #define _SHADER_H_
 
-#include "glew-1.10.0\include\GL\glew.h"
+#include <glew-1.10.0\include\GL\glew.h>
 
 #include <fstream>
 #include <sstream>
