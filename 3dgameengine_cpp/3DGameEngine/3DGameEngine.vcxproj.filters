@@ -108,6 +108,9 @@
     <ClInclude Include="sprite2d.h">
       <Filter>헤더 파일\components2d</Filter>
     </ClInclude>
+    <ClInclude Include="physicsManager2d.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mainComponent.cpp">
@@ -166,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="sprite2d.cpp">
       <Filter>소스 파일\components2d</Filter>
+    </ClCompile>
+    <ClCompile Include="physicsManager2d.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

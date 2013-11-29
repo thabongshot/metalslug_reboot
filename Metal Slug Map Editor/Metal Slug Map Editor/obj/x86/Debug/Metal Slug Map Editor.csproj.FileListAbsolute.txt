@@ -16,3 +16,21 @@ C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal Slug Map 
 C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal Slug Map Editor.pdb
 C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Theme\ExpanderTemplate.baml
 C:\WPF\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Theme\Theme.baml
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\bin\Debug\Metal Slug Map Editor.exe.config
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal Slug Map Editor.exe
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal Slug Map Editor.pdb
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\bin\Debug\Metal Slug Map Editor.exe
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\bin\Debug\Metal Slug Map Editor.pdb
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\bin\Debug\SharpGL.dll
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\bin\Debug\SharpGL.SceneGraph.dll
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\bin\Debug\SharpGL.WPF.dll
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal Slug Map Editor.csprojResolveAssemblyReference.cache
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Theme\ExpanderTemplate.baml
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\MainWindow.baml
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Theme\Theme.baml
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\MainWindow.g.cs
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\App.g.cs
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal Slug Map Editor_MarkupCompile.cache
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal Slug Map Editor.g.resources
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal_Slug_Map_Editor.Properties.Resources.resources
+C:\Users\KCW\Documents\GitHub\metalslug_reboot\Metal Slug Map Editor\Metal Slug Map Editor\obj\x86\Debug\Metal Slug Map Editor.csproj.GenerateResource.Cache
