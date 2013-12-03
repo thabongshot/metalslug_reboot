@@ -20,7 +20,7 @@ ContactListener *contactListener;
 
 PhysicsManager2D::PhysicsManager2D()
 {
-	pWorld = new b2World(b2Vec2(0, -9.8));
+	pWorld = new b2World(b2Vec2(0.0f, -9.8f));
 
 	contactListener = new ContactListener();
 	pWorld->SetContactListener(contactListener);

@@ -10,10 +10,13 @@
 
 class Mesh
 {
-private:
+protected:
 	GLuint vbo;
 	GLuint ibo;
 	unsigned int indices_size;
+
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices;
 
 	Shader *shader;
 
@@ -35,7 +38,30 @@ public:
 
 	Mesh(const char *fileName, Material *material, Shader *shader);
 
-	void drawMesh(Transform *transform);
+	virtual void drawMesh(Transform *transform);
+};
+
+class Sprite : public Mesh
+{
+private:
+	int rows;
+	unsigned int *colsPerRow;
+
+	int currRow;
+	int currCol;
+
+	float speed;
+
+	bool isLoop;
+
+	float stateTime;
+
+	void update();
+
+public:
+	Sprite(Material *material, Shader *shader, int rows, unsigned int *colsPerRow, float speed, bool isLoop);
+
+	virtual void drawMesh(Transform *transform);
 };
 
 #endif

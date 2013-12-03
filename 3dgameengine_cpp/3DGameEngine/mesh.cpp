@@ -6,6 +6,8 @@
 #include <assimp\include\scene.h>
 #include <assimp\include\postprocess.h>
 
+#include "time.h"
+
 #include <fstream>
 
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, Material *material, Shader *shader)
@@ -90,19 +92,101 @@ void Mesh::loadMesh(const char *fileName)
 
 void Mesh::setData(std::vector<Vertex> vertices, std::vector<unsigned int> indices)
 {
+	this->vertices = vertices;
+	this->indices = indices;
+
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * vertices.size(), &vertices[0], GL_STREAM_DRAW);
 
 	glGenBuffers(1, &ibo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), &indices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), &indices[0], GL_STREAM_DRAW);
 
 	indices_size = indices.size();
 }
 
 void Mesh::drawMesh(Transform *transform)
 {
+	shader->bind();
+	if (transform)
+		shader->updateUniforms(transform->getTransformationMatrix(), transform->getProjectionMatrix(), material);
+
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
+	glEnableVertexAttribArray(3);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)12);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)20);
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)32);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	glDrawElements(GL_TRIANGLES, indices_size, GL_UNSIGNED_INT, (const GLvoid*)0);
+
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
+	glDisableVertexAttribArray(3);
+}
+
+Sprite::Sprite(Material *material, Shader *shader, int rows, unsigned int *colsPerRow, float speed, bool isLoop) : Mesh()
+{
+	this->material = material;
+	this->shader = shader;
+	this->rows = rows;
+	this->colsPerRow = colsPerRow;
+	this->speed = speed;
+	this->isLoop = isLoop;
+	this->stateTime = 0;
+
+	this->currRow = 4;
+	this->currCol = 0;
+
+	std::vector<Vertex> vertices;
+	std::vector<unsigned int> indices;
+
+	vertices.push_back(Vertex(Vector3f(0, 0, 0), Vector2f(0, 0), Vector3f(), Vector3f()));
+	vertices.push_back(Vertex(Vector3f(0, 1, 0), Vector2f(0, 1), Vector3f(), Vector3f()));
+	vertices.push_back(Vertex(Vector3f(1, 1, 0), Vector2f(1, 1), Vector3f(), Vector3f()));
+	vertices.push_back(Vertex(Vector3f(1, 0, 0), Vector2f(1, 0), Vector3f(), Vector3f()));
+
+	indices.push_back(0); indices.push_back(1); indices.push_back(2); indices.push_back(0); indices.push_back(2); indices.push_back(3);
+
+	setData(vertices, indices);
+}
+
+void Sprite::update()
+{
+	stateTime += (float)Time::getDelta();
+
+	int tmpCol = (int)(stateTime / speed);
+
+	if(tmpCol >= colsPerRow[currRow])
+	{
+		currCol = isLoop ? (tmpCol % colsPerRow[currRow]) : (colsPerRow[currRow] - 1);
+	}
+
+	vertices.at(0).setTexCoord(Vector2f((float)currCol / (float)colsPerRow[currRow], (float)currRow / (float)rows));
+	vertices.at(1).setTexCoord(Vector2f((float)currCol / (float)colsPerRow[currRow], (float)(currRow + 1) / (float)rows));
+	vertices.at(2).setTexCoord(Vector2f((float)(currCol + 1) / (float)colsPerRow[currRow], (float)(currRow + 1) / (float)rows));
+	vertices.at(3).setTexCoord(Vector2f((float)(currCol + 1) / (float)colsPerRow[currRow], (float)currRow / (float)rows));
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferSubData(GL_ARRAY_BUFFER, 0 * sizeof(Vertex), sizeof(Vertex), &vertices.at(0));
+	glBufferSubData(GL_ARRAY_BUFFER, 1 * sizeof(Vertex), sizeof(Vertex), &vertices.at(1));
+	glBufferSubData(GL_ARRAY_BUFFER, 2 * sizeof(Vertex), sizeof(Vertex), &vertices.at(2));
+	glBufferSubData(GL_ARRAY_BUFFER, 3 * sizeof(Vertex), sizeof(Vertex), &vertices.at(3));
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+void Sprite::drawMesh(Transform *transform)
+{
+	update();
+
 	shader->bind();
 	if (transform)
 		shader->updateUniforms(transform->getTransformationMatrix(), transform->getProjectionMatrix(), material);

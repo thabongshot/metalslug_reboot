@@ -1,3 +1,5 @@
+#define _RENDER_2D_
+
 #include "scene.h"
 
 #include "shader.h"
@@ -5,6 +7,7 @@
 #include "transform.h"
 #include "time.h"
 #include "mainComponent.h"
+#include "renderUtil.h"
 
 #include "lua_backend.h"
 
@@ -20,6 +23,7 @@ std::vector<Object *> Scene::objects;
 
 Scene::Scene()
 {
+	/*
 	material = new Material(Texture("textures/blank_white.png"), Texture(), Vector3f(1, 1, 1), 2, 6);
 
 	shader = PhongShader::getInstance();
@@ -34,8 +38,6 @@ Scene::Scene()
 	if (bunny)
 		bunny->addComponent(new ScriptComponent(bunny, "scripts/test.lua"));
 
-	//Transform::setOrthographicProjection(-1, 1, -1, 1, 0.1f, 1000.0f);
-	Transform::setPerspectiveProjection(70, (float)glutGet(GLUT_WINDOW_WIDTH), (float)glutGet(GLUT_WINDOW_HEIGHT), 0.1f, 1000.0f);
 	Transform::setCamera(camera);
 
 	PhongShader::setAmbientLight(Vector3f(0.2f, 0.2f, 0.2f));
@@ -46,6 +48,19 @@ Scene::Scene()
 	PhongShader::setPointLight(2, PointLight(BaseLight(Vector3f(0, 0, 1), 0.8f), Vector3f(cosf(180.0f) * 2, 0, 5 + sinf(180.0f) * 2), 0, 0, 1, 40));
 
 	//PhongShader::setSpotLight(0, SpotLight(PointLight(BaseLight(Vector3f(1, 1, 1), 0.8f), Vector3f(0, 0, 5), 0, 0, 1, 40), Vector3f(0, -1, 0), 0.7f));
+	*/
+	
+	material = new Material(Texture("textures/test.png"), Texture(), Vector3f(1, 1, 1), 2, 6);
+	shader = BasicShader::getInstance();
+
+	camera = new Camera();
+	Transform::setCamera(camera);
+
+	unsigned int *colsPerRow = new unsigned int[5];
+	colsPerRow[0] = 6; colsPerRow[1] = 6; colsPerRow[2] = 6; colsPerRow[3] = 6; colsPerRow[4] = 6;
+	addObject("test", new Object("test", new Transform(Vector3f(0, 0, 0), Vector3f(0, 0, 0), Vector3f(0.5f, 0.5f, 1)), new Sprite(material, shader, 5, colsPerRow, 1.0f / colsPerRow[0] * 0.8f, true)));
+	//addObject("plane", new Object("plane", new Transform(Vector3f(0, -1, 5), Vector3f(0, 0, 0), Vector3f(10, 1, 10)), new Mesh("models/plane.obj", material, shader)));
+	
 }
 
 void Scene::input()
@@ -58,11 +73,13 @@ void Scene::input()
 
 void Scene::update()
 {
+	/*
 	float amount = (float)Time::getTime() / 800.0f;
 
 	PhongShader::getPointLight(0)->position = Vector3f(cosf(amount) * 2, 0, 5 + sinf(amount) * 2);
 	PhongShader::getPointLight(1)->position = Vector3f(cosf(amount + 90.0f) * 2, 0, 5 + sinf(amount + 90.0f) * 2);
 	PhongShader::getPointLight(2)->position = Vector3f(cosf(amount + 180.0f) * 2, 0, 5 + sinf(amount + 180.0f) * 2);
+	*/
 
 	for (unsigned int i = 0; i < objects.size(); i++)
 	{
@@ -72,11 +89,16 @@ void Scene::update()
 			o->update();
 	}
 
-	camera->setPosition(getObject("bunny")->getTransform()->getTranslation() + Vector3f(0, 1, -5));
+	//camera->setPosition(getObject("bunny")->getTransform()->getTranslation() + Vector3f(0, 1, -5));
 }
 
 void Scene::render()
 {
+	float aspectRatio = (float)glutGet(GLUT_WINDOW_WIDTH) / (float)glutGet(GLUT_WINDOW_HEIGHT);
+
+	Transform::setOrthographicProjection(-4, 4, -4 / aspectRatio, 4 / aspectRatio, 1, 1000.0f);
+	//Transform::setPerspectiveProjection(70, (float)glutGet(GLUT_WINDOW_WIDTH), (float)glutGet(GLUT_WINDOW_HEIGHT), 0.1f, 1000.0f);
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	for (unsigned int i = 0; i < objects.size(); i++)

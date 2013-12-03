@@ -61,8 +61,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32.lib;ilu.lib;ilut.lib;devil.lib;assimp.lib;lua5.1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(COMMON_LIB_DIR)\DevIL\lib;$(COMMON_LIB_DIR)\lua5.1\lib\dll;$(COMMON_LIB_DIR)\glew-1.10.0\lib\Release\Win32;$(COMMON_LIB_DIR)\freeglut-2.8.1\lib\x86\Debug;$(COMMON_LIB_DIR)\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Box2D.lib;glew32.lib;ilu.lib;ilut.lib;devil.lib;assimp.lib;lua5.1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(COMMON_LIB_DIR)\DevIL\lib;$(COMMON_LIB_DIR)\Box2D\bin\Debug;$(COMMON_LIB_DIR)\lua5.1\lib\dll;$(COMMON_LIB_DIR)\glew-1.10.0\lib\Release\Win32;$(COMMON_LIB_DIR)\freeglut-2.8.1\lib\x86\Debug;$(COMMON_LIB_DIR)\assimp\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -97,7 +97,6 @@
     <ClInclude Include="object.h" />
     <ClInclude Include="renderUtil.h" />
     <ClInclude Include="shader.h" />
-    <ClInclude Include="sprite2d.h" />
     <ClInclude Include="technique.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="time.h" />
@@ -119,7 +118,6 @@
     <ClCompile Include="object.cpp" />
     <ClCompile Include="renderUtil.cpp" />
     <ClCompile Include="shader.cpp" />
-    <ClCompile Include="sprite2d.cpp" />
     <ClCompile Include="technique.cpp" />
     <ClCompile Include="texture.cpp" />
     <ClCompile Include="time.cpp" />

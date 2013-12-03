@@ -43,12 +43,6 @@
     <Filter Include="소스 파일\components\lights">
       <UniqueIdentifier>{b7bf3d5b-4f6f-4147-89ba-5d6a39f6f764}</UniqueIdentifier>
     </Filter>
-    <Filter Include="헤더 파일\components2d">
-      <UniqueIdentifier>{21736f3e-4513-4e2a-977c-ff8c11d5acb2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\components2d">
-      <UniqueIdentifier>{3eb1d105-21bc-4c36-9ebb-2ebd5e984d6f}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mainComponent.h">
@@ -104,9 +98,6 @@
     </ClInclude>
     <ClInclude Include="lua_backend.h">
       <Filter>헤더 파일\components</Filter>
-    </ClInclude>
-    <ClInclude Include="sprite2d.h">
-      <Filter>헤더 파일\components2d</Filter>
     </ClInclude>
     <ClInclude Include="physicsManager2d.h">
       <Filter>헤더 파일</Filter>
@@ -166,9 +157,6 @@
     </ClCompile>
     <ClCompile Include="lua_backend.cpp">
       <Filter>소스 파일\components</Filter>
-    </ClCompile>
-    <ClCompile Include="sprite2d.cpp">
-      <Filter>소스 파일\components2d</Filter>
     </ClCompile>
     <ClCompile Include="physicsManager2d.cpp">
       <Filter>소스 파일</Filter>
