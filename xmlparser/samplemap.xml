@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<map>
+	<img_resources>
+		<img src="path0" width="50" height="50" sprites="5">img0</img>
+		<img src="path1" width="50" height="50" sprites="5">img1</img>
+		<img src="path2" width="50" height="50" sprites="5">img2</img>
+		<img src="path3" width="50" height="50" sprites="5">img3</img>
+		<img src="path4" width="50" height="50" sprites="5">img4</img>
+		<img src="path5" width="50" height="50" sprites="5">img5</img>
+		<img src="path6" width="50" height="50" sprites="5">img6</img>
+	</img_resources>
+
+	<background_far_resources>
+		<background_far pos_x="0" pos_y="0" speed="0.8">img0</background_far>
+		<background_far pos_x="0" pos_y="0" speed="0.8">img1</background_far>
+	</background_far_resources>
+	
+	<background_near_resources>
+		<background_near pos_x="0" pos_y="0">img2</background_near>
+	</background_near_resources>
+	
+	<object_resources>
+		<object pos_x="0" pos_y="0">img4</object>
+		<object pos_x="0" pos_y="0">img5</object>
+	</object_resources>
+	
+	<foreground_resources>
+		<foreground pos_x="0" pos_y="0" speed="1.2">img6</foreground>
+	</foreground_resources>
+</map>
+	
