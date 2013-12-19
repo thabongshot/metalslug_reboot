@@ -20,12 +20,21 @@ Animation::Animation(SDL_Texture *sheet, int frames, int speed) {
 		clips[i].w = width / frames;
 		clips[i].h = height;
 	}
+	played = false;
+	finished = true;
+
+	stateTime = 0;
 }
 
 void Animation::Update(Timer *timer) {
-	currFrame = (timer->GetElapsedTime() / 100 * speed) % frames;
+	stateTime += timer->GetDeltaTime() / 10;
+	currFrame = (stateTime) / speed;
+	if(currFrame >= frames) {
+		currFrame = currFrame % frames;
+		finished = true;
+	}
 }
 
-void Animation::Render(int x, int y, SDL_Renderer *renderer) {
-	ApplySurface(x, y, sheet, renderer, &clips[currFrame]);
+void Animation::Render(int x, int y, int camX, int camY, SDL_Renderer *renderer) {
+	ApplySurface(x - clips[currFrame].w / 2 - camX + 400, y - clips[currFrame].h / 2 - camY + 300, sheet, renderer, &clips[currFrame]);
 }

@@ -13,13 +13,17 @@ private:
 	int currFrame;
 
 public:
+	bool played;
+	bool finished;
+	int stateTime;
+
 	Animation();
 
 	Animation(SDL_Texture *sheet, int frames, int speed);
 	
 	void Update(Timer *timer);
 
-	void Render(int x, int y, SDL_Renderer *renderer);
+	void Render(int x, int y, int camX, int camY, SDL_Renderer *renderer);
 };
 
 #endif

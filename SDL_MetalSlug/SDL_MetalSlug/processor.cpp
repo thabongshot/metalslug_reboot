@@ -39,11 +39,8 @@ void Processor::Run() {
 }
 
 void Processor::HandleEvents(SDL_Event *e) {
-	switch(e->type) {
-	case SDL_QUIT:
+	if(e->type == SDL_QUIT)
 		quit = true;
-		return;
-	};
 
 	if(scene)
 			scene->Input(e);

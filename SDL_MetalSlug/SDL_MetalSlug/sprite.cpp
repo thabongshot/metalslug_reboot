@@ -16,22 +16,38 @@ Sprite::Sprite(int x, int y, int moveSpeed, Animation **animations, int totalAni
 
 void Sprite::SetCurrAnimation(int idx) {
 	if(idx >= 0 && idx < totalAnimations) {
+		if(currAnimation) { 
+			currAnimation->played = false;
+			currAnimation->finished = true;
+		}
 		currAnimation = animations[idx];
+		currAnimation->played = true;
+		currAnimation->finished = false;
 	}
+}
+
+Animation *Sprite::getAnimation(int idx) {
+	if(idx >= 0 && idx < totalAnimations) {
+		return animations[idx];
+	}
+	
+	return nullptr;
+}
+
+void Sprite::Input(SDL_Event *e) {
+
 }
 
 void Sprite::Update(Timer *timer) {
 	if(!active) return;
-	x += xDir * (timer->GetDeltaTime() / 10) * moveSpeed;
-	y += yDir * (timer->GetDeltaTime() / 10) * moveSpeed;
 
 	if(currAnimation)
 		currAnimation->Update(timer);
 }
 
-void Sprite::Render(SDL_Renderer *renderer) {
+void Sprite::Render(SDL_Renderer *renderer, int camX, int camY) {
 	if(!active) return;
 
 	if(currAnimation)
-		currAnimation->Render(x, y, renderer);
+		currAnimation->Render(x, y, camX, camY, renderer);
 }

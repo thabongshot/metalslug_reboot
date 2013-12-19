@@ -7,6 +7,8 @@ class Sprite {
 public:
 	int x, y;
 	int xDir, yDir;
+	bool moving;
+	bool jumping;
 	int moveSpeed;
 	bool active;
 	int totalAnimations;
@@ -18,9 +20,13 @@ public:
 
 	void SetCurrAnimation(int idx);
 
+	Animation *getAnimation(int idx);
+
+	virtual void Input(SDL_Event *e);
+
 	virtual void Update(Timer *timer);
 
-	virtual void Render(SDL_Renderer *renderer);
+	virtual void Render(SDL_Renderer *renderer, int camX, int camY);
 };
 
 #endif
