@@ -3,20 +3,28 @@
 
 #include "animation.h"
 
+#include <vector>
+
+#include <Box2D\Box2D.h>
+
 class Sprite {
 public:
-	int x, y;
 	int xDir, yDir;
 	bool moving;
 	bool jumping;
 	int moveSpeed;
 	bool active;
-	int totalAnimations;
 
-	Animation **animations;
+	b2Body *body;
+
+	std::vector<Animation*> animations;
 	Animation *currAnimation;
 
-	Sprite(int x, int y, int moveSpeed, Animation **animations, int totalAnimations);
+	Sprite(int x, int y, int hw, int hh, int moveSpeed, std::vector<Animation*> animations);
+
+	int getX();
+
+	int getY();
 
 	void SetCurrAnimation(int idx);
 

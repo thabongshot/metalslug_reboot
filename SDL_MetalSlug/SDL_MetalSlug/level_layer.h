@@ -6,13 +6,11 @@
 #include <SDL_events.h>
 
 class LevelLayer {
-private:
-	int totalSprites;
-	Sprite **sprites;
-	int parallaxSpeed;
-
 public:
-	LevelLayer(Sprite **sprites, int totalSprites, int parallaxSpeed);
+	std::vector<Sprite*> sprites;
+	float parallaxSpeed;
+
+	LevelLayer(float parallaxSpeed);
 
 	void Input(SDL_Event *e);
 

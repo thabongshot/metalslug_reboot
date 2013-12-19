@@ -3,72 +3,67 @@
 #include "utils.h"
 
 #include "player.h"
+#include "camera.h"
+#include "level.h"
+#include "level_layer.h"
 
 TestScene::TestScene() : Scene() {
 
 }
 
 Player *player;
+Camera *camera;
 
-SDL_Texture **background;
-int bW;
-int b1x, b2x;
+Level *level;
 
-int camX, camY;
+LevelLayer *background1;
+LevelLayer *background2;
+LevelLayer *actor;
+LevelLayer *foreground;
 
 void TestScene::Init(SDL_Renderer *renderer) {
-	Animation **playerAnimations = (Animation**)malloc(sizeof(Animation*) * 3);
-	playerAnimations[0] = new Animation(loadTextureExt(renderer, "car_idle.png"), 6, 1);
-	playerAnimations[1] = new Animation(loadTextureExt(renderer, "car.png"), 8, 1);
-	playerAnimations[2] = new Animation(loadTextureExt(renderer, "car_jump.png"), 8, 1);
+	camera = new Camera();
 
-	background = (SDL_Texture**)malloc(sizeof(SDL_Texture*) * 2);
+	background1 = new LevelLayer(0.8f);
+	background2 = new LevelLayer(0.8f);
+	actor = new LevelLayer(1.0f);
+	foreground = new LevelLayer(1.2f);
 
-	background[0] = loadTextureExt(renderer, "mountain_background.png");
-	background[1] = loadTextureExt(renderer, "mountain_background2.png");
-	SDL_QueryTexture(background[0], NULL, NULL, &bW, NULL);
+	level = new Level(background1, background2, actor, foreground);
 
-	b1x = 0;
-	b2x = -bW;
+	std::vector<Animation*> anim;
+	anim.push_back(new Animation(loadTextureExt(renderer, "blue_box.png"), 1, 1));
 
-	player = new Player(10, 270, 2, playerAnimations, 3);
-	camX = 10;
-	camY = 270;
-	player->active = true;
-	sprites.push_back(player);
+	std::vector<Animation*> ground;
+	ground.push_back(new Animation(loadTextureExt(renderer, "red_box.png"), 1, 1));
 
+	Sprite *groundSprite = new Sprite(0, 320, 32, 32, 0, ground);
+	groundSprite->body->SetType(b2_staticBody);
+	groundSprite->SetCurrAnimation(0);
+
+	player = new Player(0, 0, 32, 32, 200, anim);
 	player->SetCurrAnimation(0);
+
+	actor->sprites.push_back(player);
+	actor->sprites.push_back(groundSprite);
 }
 
 void TestScene::Dispose() {
-	
+	delete player;
+	delete camera;
 }
 
 void TestScene::Input(SDL_Event *e) {
-	for(int i = 0; i < sprites.size(); i++) {
-		sprites.at(i)->Input(e);
-	}
+	level->Input(e);
 }
 
 void TestScene::Update(Timer *timer) {
-	for(int i = 0; i < sprites.size(); i++) {
-		sprites.at(i)->Update(timer);
-	}
+	level->Update(timer);
 
-	camX = player->x;
-	camY = player->y;
-
-	int idx = camX / bW;
-
-	if(idx % 2 == 1) b1x = (2 * idx) * bW;
-	if(idx % 2 == 0) b2x = (2 * idx + 1) * bW;
+	camera->x = player->getX();
+	camera->y = player->getY();
 }
 
 void TestScene::Render(SDL_Renderer *renderer) {
-	ApplySurface(-camX + b1x, -camY + 260, background[0], renderer, NULL);
-	ApplySurface(-camX + b2x, -camY + 260, background[1], renderer, NULL);
-
-	for(int i = 0; i < sprites.size(); i++) {
-		sprites.at(i)->Render(renderer, camX, camY);
-	}
+	level->Render(renderer, camera->x, camera->y);
 }

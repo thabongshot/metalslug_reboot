@@ -5,7 +5,7 @@
 
 class Player : public Sprite {
 public:
-	Player(int x, int y, int moveSpeed, Animation **animations, int totalAnimations);
+	Player(int x, int y, int hw, int hh, int moveSpeed, std::vector<Animation*> animations);
 
 	virtual void Input(SDL_Event *e);
 

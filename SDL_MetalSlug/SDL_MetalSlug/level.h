@@ -1,10 +1,14 @@
 #ifndef _LEVEL_H_
 #define _LEVEL_H_
 
+#define GRAVITY_Y 200
+
 #include "level_layer.h"
 #include "utils.h"
 
 #include <SDL_events.h>
+
+#include <Box2D\Box2D.h>
 
 class Level {
 private:
@@ -14,6 +18,8 @@ private:
 	LevelLayer *foreground;
 
 public:
+	static b2World *world;
+
 	Level(LevelLayer *back1, LevelLayer *back2, LevelLayer *actor, LevelLayer *fore);
 
 	void Input(SDL_Event *e);

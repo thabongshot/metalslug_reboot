@@ -2,8 +2,8 @@
 
 #include "input.h"
 
-Player::Player(int x, int y, int moveSpeed, Animation **animations, int totalAnimations) : Sprite(x, y, moveSpeed, animations, totalAnimations) {
-	
+Player::Player(int x, int y, int hw, int hh, int moveSpeed, std::vector<Animation*> animations) : Sprite(x, y, hw, hh, moveSpeed, animations) {
+	body->SetUserData(this);
 }
 
 void Player::Input(SDL_Event *e) {
@@ -19,13 +19,6 @@ void Player::Input(SDL_Event *e) {
 		if(e->key.state == SDL_PRESSED)
 			xDir = 1;
 		break;
-	case SDLK_SPACE:
-		if(e->key.state == SDL_PRESSED && !jumping && !getAnimation(2)->played) {
-			jumping = true;
-			SetCurrAnimation(2);
-			getAnimation(2)->stateTime = 0;
-		}
-		break;
 	};
 }
 
@@ -35,6 +28,7 @@ void Player::Update(Timer *timer) {
 	if(currAnimation)
 		currAnimation->Update(timer);
 
+	/*
 	if(getAnimation(2)->finished) {
 		jumping = false;
 		yDir = 0;
@@ -57,11 +51,16 @@ void Player::Update(Timer *timer) {
 
 	x += xDir * (timer->GetDeltaTime() / 10) * moveSpeed;
 	y += yDir * (timer->GetDeltaTime() / 10) * moveSpeed;
+	*/
+
+	body->SetLinearVelocity(b2Vec2(xDir * moveSpeed, yDir * moveSpeed));
+
+	body->SetLinearVelocity(body->GetLinearVelocity() + b2Vec2(0, 200));
 }
 
 void Player::Render(SDL_Renderer *renderer, int camX, int camY) {
 	if(!active) return;
 
 	if(currAnimation)
-		currAnimation->Render(x, y, camX, camY, renderer);
+		currAnimation->Render(body->GetPosition().x, body->GetPosition().y, camX, camY, renderer);
 }
