@@ -19,6 +19,7 @@ private:
 	std::vector<std::vector<int>> map;
 	std::vector<Bullet*> bullets;
 	bool direction[2];
+	int last_direction;
 
 	static const int playerSpeed = 3;
 

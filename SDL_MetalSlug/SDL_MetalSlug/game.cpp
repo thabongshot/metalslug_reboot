@@ -12,6 +12,7 @@ Game::Game() {
 	BaseClass::coord.h = camera.h = SCREEN_HEIGHT;
 
 	direction[0] = direction[1] = 0;
+	last_direction = 0;
 	running = true;
 
 	player1 = new Player(load_image("player.bmp"));
@@ -62,12 +63,19 @@ void Game::handleEvents() {
 			switch(e.key.keysym.sym) {
 			case SDLK_LEFT:
 				direction[0] = 1;
+				last_direction = 0;
 				break;
 			case SDLK_RIGHT:
 				direction[1] = 1;
+				last_direction = 1;
 				break;
 			case SDLK_a:
-				bullets.push_back(new Bullet(bulletImg, player1->getRect()->x + player1->getRect()->w, player1->getRect()->y + 15, 8, 0));
+				if(last_direction == 0) {
+					bullets.push_back(new Bullet(bulletImg, player1->getRect()->x - 25, player1->getRect()->y + 15, -8, 0));
+				}
+				else if(last_direction == 1) {
+					bullets.push_back(new Bullet(bulletImg, player1->getRect()->x + player1->getRect()->w, player1->getRect()->y + 15, 8, 0));
+				}
 				break;
 			}
 			break;
