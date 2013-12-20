@@ -7,7 +7,7 @@
 #include "base.h"
 #include "point.h"
 
-class Player : BaseClass{
+class Player : public BaseClass{
 private:
 	SDL_Rect box;
 	SDL_Surface *image;

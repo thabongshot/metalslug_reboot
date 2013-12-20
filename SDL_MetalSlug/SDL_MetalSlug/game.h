@@ -22,6 +22,7 @@ private:
 	int last_direction;
 
 	static const int playerSpeed = 3;
+	static const int bulletSpeed = 10;
 
 	SDL_Surface *load_image(const char* fileName);
 	void loadMap(const char* fileName);
@@ -30,6 +31,7 @@ private:
 	bool running;
 
 	Player *player1;
+	Player *enemy1;
 
 	SDL_Surface *building_corridor;
 	SDL_Rect building_corridor_rect;
