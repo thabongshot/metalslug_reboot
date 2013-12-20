@@ -18,6 +18,7 @@ private:
 	SDL_Rect camera;
 	std::vector<std::vector<int>> map;
 	std::vector<Bullet*> bullets;
+	std::vector<Player*> entities;
 	bool direction[2];
 	int last_direction;
 
@@ -31,7 +32,6 @@ private:
 	bool running;
 
 	Player *player1;
-	Player *enemy1;
 
 	SDL_Surface *building_corridor;
 	SDL_Rect building_corridor_rect;

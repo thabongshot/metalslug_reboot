@@ -18,9 +18,15 @@ Game::Game() {
 	player1 = new Player(load_image("player.bmp"));
 	player1->getRect()->y = 100;
 
-	enemy1 = new Player(load_image("enemy.bmp"));
-	enemy1->getRect()->x = 700;
-	enemy1->getRect()->y = 100;
+	entities.push_back(player1);
+
+	entities.push_back(new Player(load_image("enemy.bmp")));
+	entities.back()->getRect()->x = 700;
+	entities.back()->getRect()->y = 100;
+
+	entities.push_back(new Player(load_image("enemy.bmp")));
+	entities.back()->getRect()->x = 780;
+	entities.back()->getRect()->y = 100;
 
 	bulletImg = load_image("bullet.bmp");
 
@@ -75,7 +81,7 @@ void Game::handleEvents() {
 				break;
 			case SDLK_a:
 				if(last_direction == 0) {
-					bullets.push_back(new Bullet(bulletImg, player1->getRect()->x - 25, player1->getRect()->y + 25, -bulletSpeed, 0));
+					bullets.push_back(new Bullet(bulletImg, player1->getRect()->x - 20, player1->getRect()->y + 25, -bulletSpeed, 0));
 				}
 				else if(last_direction == 1) {
 					bullets.push_back(new Bullet(bulletImg, player1->getRect()->x + player1->getRect()->w, player1->getRect()->y + 25, bulletSpeed, 0));
@@ -105,10 +111,9 @@ void Game::showMap() {
 	SDL_BlitSurface(building_corridor_wall, &camera, screen, &building_corridor_wall_rect);
 	SDL_BlitSurface(building_corridor, &camera, screen, &building_corridor_rect);
 
-	if(player1)
-		player1->show(screen);
-	if(enemy1)
-		enemy1->show(screen);
+	for(int i = 0; i < entities.size(); i++) {
+		entities[i]->show(screen);
+	}
 }
 
 void Game::start() {
@@ -156,19 +161,20 @@ void Game::start() {
 					bullets.erase(bullets.begin() + i);
 			}
 			else {
-				if(enemy1 && enemy1->collision(enemy1->getRect(), bullets[i]->getRect())) {
-					delete bullets[i];
-					bullets.erase(bullets.begin() + i);
-					delete enemy1;
-					enemy1 = nullptr;
+				for(int j = 0; j < entities.size(); j++) {
+					if(entities[j] != player1 && entities[j]->collision(entities[j]->getRect(), bullets[i]->getRect())) {
+						delete bullets[i];
+						bullets.erase(bullets.begin() + i);
+						delete entities[j];
+						entities.erase(entities.begin() + j);
+					}
 				}
 			}
 		}
 
-		if(player1)
-			player1->move(map);
-		if(enemy1)
-			enemy1->move(map);
+		for(int i = 0; i < entities.size(); i++) {
+			entities[i]->move(map);
+		}
 
 		for(int i = 0; i < bullets.size(); i++) {
 			bullets[i]->move();
