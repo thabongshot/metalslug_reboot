@@ -19,9 +19,8 @@ private:
 	std::vector<Bullet*> bullets;
 	std::vector<Player*> entities;
 	bool direction[2];
-	int last_direction;
 
-	static const int playerSpeed = 3;
+	static const int playerSpeed = 2;
 	static const int bulletSpeed = 10;
 
 	SDL_Surface *load_image(const char* fileName);
@@ -53,7 +52,19 @@ public:
 	Game();
 	~Game();
 
+	void createEri(int x, int y);
+
+	void createEnemy(int x, int y);
+
 	void start();
+
+	void update();
+
+	void movePlayer();
+
+	void moveBullets();
+
+	void show();
 };
 
 #endif

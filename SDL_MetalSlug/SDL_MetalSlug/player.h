@@ -7,14 +7,24 @@
 #include "base.h"
 
 class Player : public BaseClass{
-private:
+protected:
 	SDL_Rect box;
-	SDL_Surface *image;
+	std::vector<SDL_Surface*> sheets;
+	std::vector<std::vector<SDL_Rect>> animClips;
+	std::vector<bool> loop;
+	int currAnim;
 	int xvel, yvel;
-	SDL_Rect clips[1];
+	int hp;
+	bool ground;
+	bool jump;
+	int lastDirection;
+	double frame;
 
 public:
-	Player(SDL_Surface *img);
+	Player(std::vector<SDL_Surface*> sheets, 
+		   std::vector<std::vector<SDL_Rect>> animClips,
+		   std::vector<bool> loop,
+		   int hp);
 	~Player();
 
 	SDL_Rect *getRect();
@@ -24,6 +34,22 @@ public:
 
 	void setYVel(int vel);
 	int getYVel();
+
+	void setHP(int hp);
+	int getHP();
+
+	int getLastDirection();
+	void setLastDirection(int dir);
+
+	void setCurrAnim(int idx);
+
+	bool isJumping();
+	bool isGrounded();
+
+	void setGrounded();
+	void setJump(int vel);
+
+	void damage(int amount);
 
 	void move(const std::vector<std::vector<int>> map);
 	void show(SDL_Surface *screen, SDL_Rect *camera);
