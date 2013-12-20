@@ -43,10 +43,10 @@ void Player::setYVel(int vel) {
 	yvel = vel;
 }
 
-void Player::show(SDL_Surface *screen) {
+void Player::show(SDL_Surface *screen, SDL_Rect *camera) {
 	SDL_Rect tmpRect;
-	tmpRect.x = box.x - BaseClass::coord.x;
-	tmpRect.y = box.y - BaseClass::coord.y;
+	tmpRect.x = box.x - camera->x;
+	tmpRect.y = box.y - camera->y;
 	tmpRect.w = box.w;
 	tmpRect.h = box.h;
 

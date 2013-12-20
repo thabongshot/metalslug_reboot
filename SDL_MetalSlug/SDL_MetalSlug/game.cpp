@@ -1,31 +1,37 @@
 #include "game.h"
+#include "pixel.h"
 
 SDL_Rect BaseClass::coord;
+SDL_Rect BaseClass::window_coord;
 
 Game::Game() {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
-	screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_SWSURFACE);
+	screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32, SDL_HWSURFACE);
+	canvas = SDL_DisplayFormat(screen);
+	SDL_ShowCursor(0);
 
 	BaseClass::coord.x = BaseClass::coord.y = camera.x = camera.y = 0;
-	BaseClass::coord.w = camera.w = SCREEN_WIDTH;
-	BaseClass::coord.h = camera.h = SCREEN_HEIGHT;
+	BaseClass::coord.w = camera.w = BACKBUFFER_WIDTH;
+	BaseClass::coord.h = camera.h = BACKBUFFER_HEIGHT;
+
+	BaseClass::window_coord.x = BaseClass::window_coord.y = 0;
+	BaseClass::window_coord.w = SCREEN_WIDTH;
+	BaseClass::window_coord.h = SCREEN_HEIGHT;
 
 	direction[0] = direction[1] = 0;
-	last_direction = 0;
+	last_direction = 1;
 	running = true;
 
 	player1 = new Player(load_image("player.bmp"));
 	player1->getRect()->y = 100;
 
-	entities.push_back(player1);
-
 	entities.push_back(new Player(load_image("enemy.bmp")));
-	entities.back()->getRect()->x = 700;
+	entities.back()->getRect()->x = 500;
 	entities.back()->getRect()->y = 100;
 
 	entities.push_back(new Player(load_image("enemy.bmp")));
-	entities.back()->getRect()->x = 780;
+	entities.back()->getRect()->x = 600;
 	entities.back()->getRect()->y = 100;
 
 	bulletImg = load_image("bullet.bmp");
@@ -33,14 +39,20 @@ Game::Game() {
 	building_corridor = load_image("building_corridor.bmp");
 	building_corridor_rect.x = 0;
 	building_corridor_rect.y = 0;
-	building_corridor_rect.w = 2128;
-	building_corridor_rect.h = 216;
+	building_corridor_rect.w = building_corridor->w;
+	building_corridor_rect.h = building_corridor->h;
 
 	building_corridor_wall = load_image("building_corridor_wall.bmp");
 	building_corridor_wall_rect.x = 0;
 	building_corridor_wall_rect.y = 80;
-	building_corridor_wall_rect.w = 2128;
-	building_corridor_wall_rect.h = 80;
+	building_corridor_wall_rect.w = building_corridor_wall->w;
+	building_corridor_wall_rect.h = building_corridor_wall->h;
+
+	debris = load_image("debris.bmp");
+	debris_rect.x = 0;
+	debris_rect.y = 170;
+	debris_rect.w = debris->w;
+	debris_rect.h = debris->h;
 }
 
 Game::~Game() {
@@ -108,12 +120,20 @@ void Game::loadMap(const char *fileName) {
 }
 
 void Game::showMap() {
-	SDL_BlitSurface(building_corridor_wall, &camera, screen, &building_corridor_wall_rect);
-	SDL_BlitSurface(building_corridor, &camera, screen, &building_corridor_rect);
+	SDL_BlitSurface(building_corridor_wall, &camera, canvas, &building_corridor_wall_rect);
+	SDL_BlitSurface(building_corridor, &camera, canvas, &building_corridor_rect);
 
 	for(int i = 0; i < entities.size(); i++) {
-		entities[i]->show(screen);
+		entities[i]->show(canvas, &camera);
 	}
+
+	player1->show(canvas, &camera);
+
+	for(int i = 0; i < bullets.size(); i++) {
+		bullets[i]->show(canvas, &camera);
+	}
+
+	SDL_BlitSurface(debris, &camera, canvas, &debris_rect);
 }
 
 void Game::start() {
@@ -127,13 +147,11 @@ void Game::start() {
 				player1->setXVel(-playerSpeed);
 				if(player1->getRect()->x - camera.x <= BaseClass::coord.w / 2 - player1->getRect()->w / 2) {
 					camera.x -= playerSpeed;
-					BaseClass::coord.x -= playerSpeed;
 				}
 			}
 			else player1->setXVel(0);
 			if(camera.x < 0) {
 				camera.x = 0;
-				BaseClass::coord.x = 0;
 			}
 		}
 		else if(direction[1]) {
@@ -141,13 +159,11 @@ void Game::start() {
 				player1->setXVel(playerSpeed);
 				if(player1->getRect()->x - camera.x >= BaseClass::coord.w / 2 - player1->getRect()->w / 2) {
 					camera.x += playerSpeed;
-					BaseClass::coord.x += playerSpeed;
 				}
 			}
 			else player1->setXVel(0);
-			if(camera.x > 2128 - SCREEN_WIDTH) {
-				camera.x = 2128 - SCREEN_WIDTH;
-				BaseClass::coord.x = 2128 - SCREEN_WIDTH;
+			if(camera.x > 2128 - camera.w) {
+				camera.x = 2128 - camera.w;
 			}
 		}
 		else {
@@ -155,14 +171,14 @@ void Game::start() {
 		}
 
 		for(int i = 0; i < bullets.size(); i++) {
-			if(bullets[i]->getRect()->x >= BaseClass::coord.x + BaseClass::coord.w ||
-				bullets[i]->getRect()->x + bullets[i]->getRect()->w <= BaseClass::coord.x) {
+			if(bullets[i]->getRect()->x + bullets[i]->getRect()->w + 10 >= camera.x + camera.w ||
+				bullets[i]->getRect()->x + 15 <= camera.x) {
 					delete bullets[i];
 					bullets.erase(bullets.begin() + i);
 			}
 			else {
 				for(int j = 0; j < entities.size(); j++) {
-					if(entities[j] != player1 && entities[j]->collision(entities[j]->getRect(), bullets[i]->getRect())) {
+					if(entities[j]->collision(entities[j]->getRect(), bullets[i]->getRect())) {
 						delete bullets[i];
 						bullets.erase(bullets.begin() + i);
 						delete entities[j];
@@ -172,6 +188,8 @@ void Game::start() {
 			}
 		}
 
+		player1->move(map);
+
 		for(int i = 0; i < entities.size(); i++) {
 			entities[i]->move(map);
 		}
@@ -180,11 +198,11 @@ void Game::start() {
 			bullets[i]->move();
 		}
 
+		SDL_FillRect(canvas, &BaseClass::coord, NULL);
+
 		showMap();
 
-		for(int i = 0; i < bullets.size(); i++) {
-			bullets[i]->show(screen);
-		}
+		SDL_SoftStretch(canvas, &BaseClass::coord, screen, &BaseClass::window_coord);
 
 		SDL_Flip(screen);
 		if(1000 / 30 > (SDL_GetTicks() - start)) {

@@ -5,7 +5,6 @@
 #include <iostream>
 #include <vector>
 #include "base.h"
-#include "point.h"
 
 class Player : public BaseClass{
 private:
@@ -27,7 +26,7 @@ public:
 	int getYVel();
 
 	void move(const std::vector<std::vector<int>> map);
-	void show(SDL_Surface *screen);
+	void show(SDL_Surface *screen, SDL_Rect *camera);
 };
 
 #endif

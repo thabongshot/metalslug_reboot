@@ -8,13 +8,12 @@
 
 #include "base.h"
 #include "player.h"
-
-#include "point.h"
 #include "bullet.h"
 
 class Game {
 private:
 	SDL_Surface *screen;
+	SDL_Surface *canvas;
 	SDL_Rect camera;
 	std::vector<std::vector<int>> map;
 	std::vector<Bullet*> bullets;
@@ -39,10 +38,16 @@ private:
 	SDL_Surface *building_corridor_wall;
 	SDL_Rect building_corridor_wall_rect;
 
+	SDL_Surface *debris;
+	SDL_Rect debris_rect;
+
 	SDL_Surface *bulletImg;
 
-	static const int SCREEN_WIDTH = 640;
-	static const int SCREEN_HEIGHT = 480;
+	static const int SCREEN_WIDTH = 800;
+	static const int SCREEN_HEIGHT = 600;
+
+	static const int BACKBUFFER_WIDTH = 255;
+	static const int BACKBUFFER_HEIGHT = 224;
 
 public:
 	Game();
