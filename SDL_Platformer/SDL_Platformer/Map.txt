@@ -1,0 +1,10 @@
+1
+bg_BuildingCorridor
+5
+fg_BuildingFront
+fg_BuildingFrontWall
+fg_BuildingCorridor
+fg_BuildingCorridorWall
+fg_BuildingCorridorVent
+1
+fr_Debris

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<level>
+	<map>
+		<background_far_resource speed="0.8">
+			<background_far pos_x="-3" pos_y="-63">0</background_far>
+			<background_far pos_x="381" pos_y="-56">0</background_far>
+			<background_far pos_x="764" pos_y="-55">0</background_far>
+		</background_far_resource>
+		<background_near_resource speed="1">
+			<background_near pos_x="-2" pos_y="5">3</background_near>
+		</background_near_resource>
+		<foreground_resource speed="1.2">
+			<foreground_near pos_x="-6" pos_y="-176">6</foreground_near>
+			<foreground_near pos_x="423" pos_y="-176">6</foreground_near>
+			<foreground_near pos_x="855" pos_y="-175">6</foreground_near>
+		</foreground_resource>
+	</map>
+	<ground>
+		<ground_resource>
+			<ground_point pos_x="1" pos_y="-175"/>
+			<ground_point pos_x="1053" pos_y="-179"/>
+		</ground_resource>
+		<ground_resource>
+			<ground_point pos_x="174" pos_y="-173"/>
+			<ground_point pos_x="176" pos_y="-143"/>
+			<ground_point pos_x="204" pos_y="-143"/>
+			<ground_point pos_x="203" pos_y="-115"/>
+			<ground_point pos_x="318" pos_y="-115"/>
+			<ground_point pos_x="318" pos_y="-144"/>
+			<ground_point pos_x="420" pos_y="-144"/>
+			<ground_point pos_x="420" pos_y="-174"/>
+		</ground_resource>
+		<ground_resource>
+			<ground_point pos_x="796" pos_y="-175"/>
+			<ground_point pos_x="797" pos_y="-147"/>
+			<ground_point pos_x="818" pos_y="-147"/>
+			<ground_point pos_x="818" pos_y="-115"/>
+			<ground_point pos_x="875" pos_y="-116"/>
+			<ground_point pos_x="877" pos_y="-139"/>
+			<ground_point pos_x="919" pos_y="-139"/>
+			<ground_point pos_x="920" pos_y="-176"/>
+		</ground_resource>
+		<ground_resource>
+			<ground_point pos_x="1020" pos_y="-131"/>
+			<ground_point pos_x="1102" pos_y="-132"/>
+		</ground_resource>
+	</ground>
+	<position_resource>
+		<position pos_x="200" pos_y="-110"/>
+		<position pos_x="966" pos_y="-110"/>
+		<position pos_x="567" pos_y="-111"/>
+	</position_resource>
+	<camera>
+		<camera_resource type ="0">
+			<camera_point pos_x="200" pos_y="-110"/>
+			<camera_point pos_x="200" pos_y="-110"/>
+			<camera_point pos_x="567" pos_y="-111"/>
+		</camera_resource>
+		<camera_resource type ="0">
+			<camera_point pos_x="567" pos_y="-111"/>
+			<camera_point pos_x="966" pos_y="-110"/>
+			<camera_point pos_x="200" pos_y="-110"/>
+		</camera_resource>
+		<camera_resource type ="1">
+			<camera_point pos_x="200" pos_y="-110"/>
+			<camera_point pos_x="-5" pos_y="-112"/>
+		</camera_resource>
+	</camera>
+</level>

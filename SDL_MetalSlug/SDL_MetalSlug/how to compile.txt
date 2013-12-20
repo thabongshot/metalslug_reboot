@@ -1,5 +1,0 @@
-www.libsdl.org 에서 SDL1.2를 받아 압축 해제.
-Visual Studio 기준으로 
-1. 프로젝트 생성 후 프로젝트 속성 -> C/C++ 항목에서 일반 탭에 추가 포함 디렉터리에 SDL include 경로 붙여넣기
-2. 링커 항목의 일반 탭에 추가 라이브러리 디렉터리에 SDL lib 경로 붙여넣기
-3. 링커 항목의 입력 탭에 추가 종속성에 SDL.lib; SDLmain.lib 입력
